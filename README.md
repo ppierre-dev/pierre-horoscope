@@ -1,3 +1,3 @@
 # pierre-horoscope
 
-## A simple react-native application get your horoscope !
+## A simple react-native application to get your horoscope !

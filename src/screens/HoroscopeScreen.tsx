@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { FooterComponent } from "../components/FooterComponent";
 import { HeaderComponent } from "../components/HeaderComponent";
 import { useHoroscope } from "../hooks/getHoroscope";
 import { Text } from "react-native-paper";
+import { getImageSource } from "../utils/getImageSource";
 
 export const HoroscopeScreen = ({ route, navigation }: any) => {
   const { data, isError, isLoading } = useHoroscope(
@@ -36,7 +37,16 @@ export const HoroscopeScreen = ({ route, navigation }: any) => {
       <View style={styles.container}>
         <HeaderComponent title="Your horoscope" />
         <View>
-          <Text>{data.date_range}</Text>
+          <Image
+            source={getImageSource(route.params.sign)}
+            style={styles.zodiacSymbol}
+          ></Image>
+          <Text>We are the {data.current_date}</Text>
+          <Text>{data.description}</Text>
+          <Text>Your lucky number is {data.lucky_number}</Text>
+          <Text>You're going to be lucky at {data.lucky_time}</Text>
+          <Text>Mood {data.mood}</Text>
+          <Text>Compatibility {data.compatibility}</Text>
         </View>
         <FooterComponent />
       </View>
@@ -51,5 +61,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ecf0f1",
     padding: 8,
     marginHorizontal: 20,
+  },
+  zodiacSymbol: {
+    width: 100,
+    height: 100,
   },
 });

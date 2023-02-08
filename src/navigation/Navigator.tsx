@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Routes } from "./Routes";
 import { HomeScreen } from "../screens/HomeScreen";
 import { HoroscopeScreen } from "../screens/HoroscopeScreen";
+import { AvailableSignsScreen } from "../screens/AvailableSignsScreen";
 const Stack = createNativeStackNavigator();
 
 export const Navigator = () => {
@@ -15,6 +16,11 @@ export const Navigator = () => {
         <Stack.Screen
           name={Routes.HOROSCOPE_PAGE}
           component={HoroscopeScreen}
+        />
+        <Stack.Screen
+          name={Routes.AVAILABLE_SIGNS_PAGE}
+          component={AvailableSignsScreen}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

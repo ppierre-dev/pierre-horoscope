@@ -7,8 +7,6 @@ function fetchHoroscope(sign: string, day: string) {
       { method: "POST" }
     );
     const data = await response.json();
-    console.log(data);
-
     return data;
   };
 }
@@ -18,8 +16,6 @@ export function useHoroscope(sign: string, day: string) {
     ["horoscope"],
     fetchHoroscope(sign, day)
   );
-
-  console.log(data, isError, isLoading);
 
   return { data, isError, isLoading };
 }
