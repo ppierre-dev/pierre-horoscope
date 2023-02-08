@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { FooterComponent } from "../components/FooterComponent";
 import { HeaderComponent } from "../components/HeaderComponent";
 import { useHoroscope } from "../hooks/getHoroscope";
-import { Text } from "react-native-paper";
+import { ActivityIndicator, Text } from "react-native-paper";
 import { getImageSource } from "../utils/getImageSource";
 
 export const HoroscopeScreen = ({ route, navigation }: any) => {
@@ -14,11 +14,33 @@ export const HoroscopeScreen = ({ route, navigation }: any) => {
   );
 
   if (isError) {
-    return <Text>Something went wrong</Text>;
+    return (
+      <View style={styles.container}>
+        <HeaderComponent title="Your horoscope" />
+        <View style={styles.container_ErrorMessages}>
+          <Text variant="titleMedium" style={styles.error_messages}>
+            Something went wrong..
+          </Text>
+          <Text variant="titleSmall" style={styles.error_messages}>
+            You can try again later or contact the support team at
+            ppierredev@gmail.com
+          </Text>
+        </View>
+        <FooterComponent />
+      </View>
+    );
   }
 
   if (isLoading) {
-    return <Text>Loading...</Text>;
+    return (
+      <View style={styles.container}>
+        <HeaderComponent title="Your horoscope" />
+        <View>
+          <ActivityIndicator animating={true} />
+        </View>
+        <FooterComponent />
+      </View>
+    );
   }
 
   if (data.message) {
@@ -37,10 +59,13 @@ export const HoroscopeScreen = ({ route, navigation }: any) => {
       <View style={styles.container}>
         <HeaderComponent title="Your horoscope" />
         <View>
-          <Image
-            source={getImageSource(route.params.sign)}
-            style={styles.zodiacSymbol}
-          ></Image>
+          <View style={styles.sign_div}>
+            <Image
+              source={getImageSource(route.params.sign)}
+              style={styles.zodiacSymbol}
+            ></Image>
+            <Text variant="titleMedium">{route.params.sign}</Text>
+          </View>
           <Text>We are the {data.current_date}</Text>
           <Text>{data.description}</Text>
           <Text>Your lucky number is {data.lucky_number}</Text>
@@ -65,5 +90,17 @@ const styles = StyleSheet.create({
   zodiacSymbol: {
     width: 100,
     height: 100,
+  },
+  container_ErrorMessages: {
+    alignItems: "center",
+  },
+  error_messages: {
+    color: "red",
+    marginBottom: 20,
+  },
+  sign_div: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 });
