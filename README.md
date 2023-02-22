@@ -27,7 +27,7 @@ yarn start
 And finally, scan the QRCODE with Expo.
 
 ## Preview
-!()[https://github.com/ppierre-dev/pierre-horoscope/blob/master/assets/pierre-horoscope-preview.gif]
+![Preview](https://github.com/ppierre-dev/pierre-horoscope/blob/master/assets/pierre-horoscope-preview.gif)
 
 ## Bootcamp progess
 Unfortunately I couldn't get the percentage of progress in the bootcamp
